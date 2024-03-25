@@ -7,13 +7,25 @@ app.get('/', function (req, res) {
  
 
 
-return res.send( 'Hello World')
-    
+
+    // const pdvCheckout = 'SELECT    pdv_checkout.* , pdv_sessao.* FROM pdv_checkout join pdv_sessao on pdv_checkout.id = pdv_sessao.idcheckout GROUP BY pdv_checkout.id ';
+    const pdvCheckout = `
+    SELECT pdv_checkout.*, pdv_sessao.*
+    FROM pdv_checkout
+    JOIN pdv_sessao ON pdv_checkout.id = pdv_sessao.idcheckout`;
 
 
-
-
-   
+    mysqlConnection.query(pdvCheckout, function(err, results){
+     
+       
+        
+        if (err) {
+            console.error('Erro ao executar a consulta:', err);
+            res.status(500).send('Erro ao processar a solicitação');
+            return;
+          }
+          res.json(results);
+    });
 });
 
 app.listen(3000, () => {
