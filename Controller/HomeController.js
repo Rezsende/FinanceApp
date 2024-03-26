@@ -1,9 +1,9 @@
-class HomeController
-{
-    async index(req, res)
-    {
-        res.sende("Sistema Rodando....controller");
+class HomeController{
+
+    async index(req, res){
+        res.send("APP EXPRESS! - JP Resende ");
     }
+
 }
 
 module.exports = new HomeController();
