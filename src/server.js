@@ -1,8 +1,14 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
+app.use(express.json());
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+
+
+app.post('/users',  (req, res)=> {
+    
+    const { name, email, password} = req.body;
+    res.send(name, email, password)
+  })
+  
 const PORT = 3333;
 app.listen(PORT, ()=>console.log(`Server is running on Port ${PORT}`) );
